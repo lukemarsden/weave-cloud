@@ -28,16 +28,16 @@
 
 <h2>Who are you?</h2>
 
-Hi, my name's Björn. I'm a fictional full-stack developer in a devops team.
+<p>Hi, my name's Björn. I'm a fictional full-stack developer in a devops team.
 I've chosen to adopt cloud-native application development using containers &amp; microservices because I want to accelerate delivery.
-On this page I'm going to show you how Weave Cloud helps me at different stages of my application development lifecycle.
+On this page I'm going to show you how Weave Cloud helps me at different stages of my application development lifecycle.</p>
 
 <h2>What are we going to be looking at?</h2>
 
-This diagram shows everything we'll be looking at below.
-It might look scary at first but don't worry, it will all make sense when you watch the videos below.
+<p>This diagram shows everything we'll be looking at below.
+It might look scary at first but don't worry, it will all make sense when you watch the videos below.</p>
 
-<em>Note: this example uses Kubernetes, but Weave Cloud intends to support Swarm and Mesos</em>
+<p><em>Note: this example uses Kubernetes, but Weave Cloud intends to fully support Docker Swarm, Mesos and DC/OS soon.</em></p>
 
 <div id="diagram" style="width:100%; height:500; margin-top:1em;"></div>
 
@@ -58,9 +58,19 @@ It might look scary at first but don't worry, it will all make sense when you wa
 </script>
 
 <h2>The app: boot microservices locally, check app in visual management dashboard</h2>
-<div style="float:right; width:500px;">
+<div style="float:right; width:530px;">
     <!-- WORDS HERE -->
+    <p>In this first scenario, we'll take a look at my application, which is a socks shop, by booting it up in Docker on my laptop, using <a target="_blank" href="https://docs.docker.com/engine/installation/mac/">Docker for Mac</a> and <a target="_blank" href="https://docs.docker.com/compose/overview/">Docker Compose</a>.</p>
     <p><em>Goal: run the app on my laptop, and check that it’s working</em></p>
+    <p>You can find the <a target="_blank" href="https://github.com/microservices-demo/microservices-demo/tree/master/deploy/docker-only">Docker Compose file here</a>. Start it up like this:</p>
+    <pre>$ git clone \
+  https://github.com/microservices-demo/microservices-demo
+$ cd deploy/docker-only
+$ docker-compose up -d</pre>
+    <p>Then plug it into a <a target="_blank" href="https://cloud.weave.works">Weave Cloud account</a> and run:
+    <pre>$ sudo curl -L git.io/scope -o /usr/local/bin/scope
+$ sudo chmod a+x /usr/local/bin/scope
+$ scope launch --service-token=YOUR_TOKEN</pre>
 </div>
 <div>
     <iframe width="530" height="298" src="https://www.youtube.com/embed/6fb-dmrKTOU?modestbranding=1&autohide=0&showinfo=0&controls=1&rel=0" frameborder="0" allowfullscreen></iframe>
@@ -69,7 +79,7 @@ It might look scary at first but don't worry, it will all make sense when you wa
 
 
 <h2>Set up prod container platform, deploy app, check it’s the same</h2>
-<div style="float:right; width:500px;">
+<div style="float:right; width:530px;">
     <!-- WORDS HERE -->
     <p><em>Goal: deploy &amp; visualize my app consistently across dev and prod</em></p>
 </div>
@@ -81,7 +91,7 @@ It might look scary at first but don't worry, it will all make sense when you wa
 
 
 <h2>Fast iteration using CI/CD pipeline</h2>
-<div style="float:right; width:500px;">
+<div style="float:right; width:530px;">
     <!-- WORDS HERE -->
     <p><em>Goal: commit and push code and automatically deploy it to production</em></p>
 </div>
@@ -92,7 +102,7 @@ It might look scary at first but don't worry, it will all make sense when you wa
 
 
 <h2>Monitor microservices metrics</h2>
-<div style="float:right; width:500px;">
+<div style="float:right; width:530px;">
     <!-- WORDS HERE -->
     <p><em>Goal: collect detailed metrics from my application, query historical data</em></p>
 </div>
@@ -103,7 +113,7 @@ It might look scary at first but don't worry, it will all make sense when you wa
 
 
 <h2>Security with network policy &amp; segmentation</h2>
-<div style="float:right; width:500px;">
+<div style="float:right; width:530px;">
     <!-- WORDS HERE -->
     <p><em>Goal: create network policy that firewalls unrelated services</em></p>
 </div>
