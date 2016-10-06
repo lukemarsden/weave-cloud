@@ -32,9 +32,23 @@ On this page I'm going to show you how Weave Cloud helps me at different stages 
 This diagram shows everything we'll be looking at below.
 It might look scary at first but don't worry, it will all make sense when you watch the videos below.
 
-<div style="width:100%; height:auto; margin-top:1em;">
-  <img src="diagram.svg" />
-</div>
+<div id="diagram" style="width:100%; height:500; margin-top:1em;"></div>
+
+<script>
+  function setTip(element, text) {
+    $("#" + element).qtip({
+      content: { text: text },
+      position: {
+        target: 'mouse', // Position it where the click was...
+        adjust: { mouse: false } // ...but don't follow the mouse
+      },
+    });
+  };
+
+  $('#diagram').load('diagram.svg', function() {
+    setTip("VCS", "Any version control system, e.g. Github or Bitbucket")
+  });
+</script>
 
 <h3>Welcome to GitHub Pages.</h3>
 
