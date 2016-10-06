@@ -54,30 +54,46 @@ It might look scary at first but don't worry, it will all make sense when you wa
   };
 
   var boxes = {
-    "Dev": "",
     "CDP": "",
     "CI": "A continous integration system, e.g. Circle, Jenkins or Gitlab CI",
     "CR": "A container registry, e.g. Docker Hub, Amazon ECR, etc",
-    "WeaveFlux": "Hosted Weave Flux service",
-    "VCS": "Any version control system, e.g. Github or Bitbucket",
-    "DevDockerForMac": "",
-    "DevScopeProbe": "",
-    "DevAppCode": "",
-    "DevPolicySpec": "",
-    "KubernetesCluster": "",
-    "WeaveCloud": "",
-    "WeaveFluxAgent": "The agent makes sure your latest release is deployed in your cluster",
-    "ClusterWeaveScopeProbe": "The probe collect real-time reports about the state of your app in production",
-    "ClusterWeaveNet": "",
-    "ClusterWeaveNPC": "",
     "ClusterApp": "This is your app, in production!",
+    "ClusterWeaveNPC": "",
+    "ClusterWeaveNet": "",
+    "ClusterWeaveScopeProbe": "The probe collect real-time reports about the state of your app in production",
+    "Dev": "",
+    "DevAppCode": "",
+    "DevDockerForMac": "",
+    "DevPolicySpec": "",
+    "DevScopeProbe": "",
+    "KubernetesCluster": "",
+    "VCS": "Any version control system, e.g. Github or Bitbucket",
+    "WeaveCloud": "",
+    "WeaveFlux": "Hosted Weave Flux service",
+    "WeaveFluxAgent": "The agent makes sure your latest release is deployed in your cluster",
+    "WeavePrism": "",
     "WeaveScope": "Weave Scope UI can be access by any memeber of your team",
-    "WeavePrism": ""
-  }
+  };
+
+  var arrows = {
+    "ArrorwPolicySpecNPC": "",
+    "ArrowCICR": "",
+    "ArrowCRFlux": "",
+    "ArrowClusterWeavePrism": "",
+    "ArrowClusterWeaveScope": "",
+    "ArrowDevAppCodeVCS": "",
+    "ArrowDevWeaveScopeProbe": "",
+    "ArrowFluxClusterAgent": "",
+    "ArrowFluxVCS": "",
+    "ArrowVCSCI": "",
+  };
 
   $('#diagram').load('diagram.svg', function() {
     $(Object.keys(boxes)).each(function(_, k) {
       setTip(k, boxes[k]);
+    });
+    $(Object.keys(arrows)).each(function(_, k) {
+      setTip(k, arrows[k]);
     });
   });
 </script>
