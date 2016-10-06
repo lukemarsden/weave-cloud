@@ -18,6 +18,7 @@
     <h1 class="project-name">
     <img src="weave.png" alt="Weave" style="position:relative; top:16px;"/> cloud<br />is a microservices console</h1>
     <h2 class="project-tagline">for devops teams who need<br />microservices visualization, continuous delivery and monitoring</h2>
+    <h2 class="project-tagline" style="margin-bottom:-20px;"><em>Weave Scope &ndash; Weave Flux &ndash; Weave Prism</em></h2>
     </section>
 
     <section class="main-content">
@@ -82,10 +83,10 @@ It might look scary at first but don't worry, it will all make sense when you wa
   });
 </script>
 
-<h2>The app: boot microservices locally, check app in visual management dashboard</h2>
+<h2>Boot microservices locally, check app in Weave Scope</h2>
 <div style="float:right; width:530px;">
     <!-- WORDS HERE -->
-    <p>In this first scenario, we'll take a look at my application, which is a socks shop, by booting it up in Docker on my laptop, using <a target="_blank" href="https://docs.docker.com/engine/installation/mac/">Docker for Mac</a> and <a target="_blank" href="https://docs.docker.com/compose/overview/">Docker Compose</a>.</p>
+    <p>In this scenario, we'll take a look at my application, which is a socks shop, by booting it up in Docker on my laptop, using <a target="_blank" href="https://docs.docker.com/engine/installation/">Docker</a> and <a target="_blank" href="https://docs.docker.com/compose/overview/">Docker Compose</a>, and plug it into Weave Scope.</p>
     <p><em>Goal: run the app on my laptop, and check that it’s working</em></p>
     <p>You can find the <a target="_blank" href="https://github.com/microservices-demo/microservices-demo/tree/master/deploy/docker-only">Docker Compose file here</a>. Start it up like this:</p>
     <pre>$ git clone \
@@ -95,7 +96,8 @@ $ docker-compose up -d</pre>
     <p>Then plug it into a <a target="_blank" href="https://cloud.weave.works">Weave Cloud account</a> and run:
     <pre>$ sudo curl -L git.io/scope -o /usr/local/bin/scope
 $ sudo chmod a+x /usr/local/bin/scope
-$ scope launch --service-token=YOUR_TOKEN</pre>
+$ scope launch --service-token=&lt;token&gt;</pre>
+    <p>Replacing <code>&lt;token&gt;</code> with your Weave Cloud token.</p>
 </div>
 <div>
     <iframe width="530" height="298" src="https://www.youtube.com/embed/6fb-dmrKTOU?modestbranding=1&autohide=0&showinfo=0&controls=1&rel=0" frameborder="0" allowfullscreen></iframe>
@@ -103,10 +105,20 @@ $ scope launch --service-token=YOUR_TOKEN</pre>
 <div style="clear:both;"></div>
 
 
-<h2>Set up prod container platform, deploy app, check it’s the same</h2>
+<h2>Set up prod container platform, deploy app, check it’s the same in Weave Scope</h2>
 <div style="float:right; width:530px;">
     <!-- WORDS HERE -->
+    <p>In this scenario, we'll create a Kubernetes cluster and then deploy the socks shop on it.</p>
     <p><em>Goal: deploy &amp; visualize my app consistently across dev and prod</em></p>
+    <p>Start by <a target="_blank" href="http://kubernetes.io/docs/getting-started-guides/kubeadm/">creating a Kubernetes cluster using kubeadm</a>.</p>
+    <p>Then install the socks shop using:</p>
+    <pre>$ kubectl apply -f \
+  microservices-demo/deploy/kubernetes/manifests</pre>
+    <p>Finally, <a target="_blank" href="https://cloud.weave.works/instances/create">create a new instance in Weave Cloud</a> and then run:</p>
+    <pre>$ kubectl apply -f \
+  'https://cloud.weave.works/launch/k8s/weavescope.yaml\
+?service-token=&lt;token&gt;'</pre>
+    <p>Replacing <code>&lt;token&gt;</code> with your Weave Cloud token.</p>
 </div>
 <div>
     <iframe width="530" height="298" src="https://www.youtube.com/embed/q7A3jqh2hOs?modestbranding=1&autohide=0&showinfo=0&controls=1&rel=0" frameborder="0" allowfullscreen></iframe>
@@ -115,7 +127,7 @@ $ scope launch --service-token=YOUR_TOKEN</pre>
 
 
 
-<h2>Fast iteration using CI/CD pipeline</h2>
+<h2>Fast iteration using CI/CD pipeline using Weave Flux</h2>
 <div style="float:right; width:530px;">
     <!-- WORDS HERE -->
     <p><em>Goal: commit and push code and automatically deploy it to production</em></p>
@@ -126,7 +138,7 @@ $ scope launch --service-token=YOUR_TOKEN</pre>
 <div style="clear:both;"></div>
 
 
-<h2>Monitor microservices metrics</h2>
+<h2>Monitor microservices metrics with Weave Prism</h2>
 <div style="float:right; width:530px;">
     <!-- WORDS HERE -->
     <p><em>Goal: collect detailed metrics from my application, query historical data</em></p>
@@ -137,7 +149,7 @@ $ scope launch --service-token=YOUR_TOKEN</pre>
 <div style="clear:both;"></div>
 
 
-<h2>Security with network policy &amp; segmentation</h2>
+<h2>Security with network policy &amp; segmentation with Weave Net Policy</h2>
 <div style="float:right; width:530px;">
     <!-- WORDS HERE -->
     <p><em>Goal: create network policy that firewalls unrelated services</em></p>
