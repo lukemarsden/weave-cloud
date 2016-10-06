@@ -43,6 +43,7 @@ It might look scary at first but don't worry, it will all make sense when you wa
 
 <script>
   function setTip(element, text) {
+    if (text === "") text = element;
     $("#" + element).qtip({
       content: { text: text },
       position: {
@@ -52,8 +53,32 @@ It might look scary at first but don't worry, it will all make sense when you wa
     });
   };
 
+  var boxes = {
+    "Dev": "",
+    "CDP": "",
+    "CI": "A continous integration system, e.g. Circle, Jenkins or Gitlab CI",
+    "CR": "A container registry, e.g. Docker Hub, Amazon ECR, etc",
+    "WeaveFlux": "Hosted Weave Flux service",
+    "VCS": "Any version control system, e.g. Github or Bitbucket",
+    "DevDockerForMac": "",
+    "DevScopeProbe": "",
+    "DevAppCode": "",
+    "DevPolicySpec": "",
+    "KubernetesCluster": "",
+    "WeaveCloud": "",
+    "WeaveFluxAgent": "The agent makes sure your latest release is deployed in your cluster",
+    "ClusterWeaveScopeProbe": "The probe collect real-time reports about the state of your app in production",
+    "ClusterWeaveNet": "",
+    "ClusterWeaveNPC": "",
+    "ClusterApp": "This is your app, in production!",
+    "WeaveScope": "Weave Scope UI can be access by any memeber of your team",
+    "WeavePrism": ""
+  }
+
   $('#diagram').load('diagram.svg', function() {
-    setTip("VCS", "Any version control system, e.g. Github or Bitbucket")
+    $(Object.keys(boxes)).each(function(_, k) {
+      setTip(k, boxes[k]);
+    });
   });
 </script>
 
