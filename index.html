@@ -38,17 +38,14 @@ On this page I'm going to show you how Weave Cloud helps me at different stages 
 <p>This diagram shows everything we'll be looking at below.
 It might look scary at first but don't worry, it will all make sense when you watch the videos below.</p>
 
-<p><em>Note: this example uses Kubernetes, but Weave Cloud intends to fully support Docker Swarm, Mesos and DC/OS soon.</em></p>
-
 <div id="diagram" style="width:100%; height:500; margin-top:1em;"></div>
-<!--
-        position: {
-            adjust: {
-                x: -300,
-                y: -50
-            }
-        }
--->
+
+<style>
+.qtip-content {
+    font-size:14px;
+    line-height: 1.5;
+}
+</style>
 
 <script>
   function setTip(element, text) {
@@ -62,32 +59,34 @@ It might look scary at first but don't worry, it will all make sense when you wa
   };
 
   var boxes = {
-    "CDP": "",
-    "CI": "A continous integration system, e.g. Circle, Jenkins or Gitlab CI",
-    "CR": "A container registry, e.g. Docker Hub, Amazon ECR, etc",
-    "ClusterApp": "This is your app, in production!",
-    "DeveloperApp": "This is your app, in development!",
-    "ContainerOrchestrator": "",
-    "ClusterWeaveNPC": "",
-    "ClusterWeaveNet": "",
-    "ClusterWeaveScopeProbe": "The probe collect real-time reports about the state of your app in production",
-    "Dev": "",
-    "DevAppCode": "",
-    "DevDockerForMac": "",
-    "DevPolicySpec": "",
-    "DevScopeProbe": "",
-    "KubernetesCluster": "",
-    "VCS": "Any version control system, e.g. Github or Bitbucket",
-    "VCSAppCode": "",
-    "VCSPolicySpec": "",
-    "WeaveCloud": "",
-    "WeaveFlux": "Hosted Weave Flux service",
-    "WeaveFluxAgent": "The agent makes sure your latest release is deployed in your cluster",
-    "WeavePrism": "",
-    "WeaveScope": "Weave Scope UI can be access by any memeber of your team",
+    "CDP": "Changes made to applications can continuously flow through this pipeline, and get deployed to your container orchestrator by Weave Flux.",
+    "CI": "A continous integration system which typically runs tests and if they pass, builds container images and pushes them into a Docker registry, e.g. Travis-CI, Circle, Jenkins or Gitlab CI.",
+    "CR": "A Docker registry, e.g. Docker Hub, Amazon ECR, Quay.io, or one you host yourself.",
+    "ClusterApp": "This is your app, in production! In this example, we use the socks shop deployed on Kubernetes, a container orchestrator.",
+    "DeveloperApp": "This is your app, in development! In this example, we use the socks shop deployed in Docker for Mac, with Docker Compose. Docker on Linux or Windows would work fine too.",
+    "ContainerOrchestrator": "This is a container orchestrator, like Kubernetes, Docker Swarm, Mesos or DC/OS. Weave Flux can deploy changes automatically.",
+    "ClusterWeaveNPC": "NPC means Network Policy Controller, which enforces network policy in your network.",
+    "ClusterWeaveNet": "Weave Net provides a network for the containers in your container orchestrator.",
+    "ClusterWeaveScopeProbe": "The Scope Probe collects real-time reports about the containers in your app so that they can be displayed in Weave Scope, this one is running in production on your container orchestrator.",
+    "Dev": "Your development environment, for example your laptop.",
+    "DevAppCode": "Your application code on your laptop, which you can edit as you develop your application.",
+    "DevDockerForMac": "Docker running on your laptop, for example Docker for Mac, Linux or Windows.",
+    "DevPolicySpec": "The files that make up your application's manifests (defining a set of microservices) and its network policy.",
+    "DevScopeProbe": "The Scope Probe collects real-time reports about the containers in your app so that they can be displayed in Weave Scope.",
+    "Prometheus": "The Prometheus agent runs on your cluster and pulls metrics from your app, the cluster, and potentially the network.",
+    "KubernetesCluster": "Your container orchestrator, aka container cluster, that would typically run on your own infrastructure or cloud. Currently Weave Flux and Weave NPC only supports Kubernetes, however Weave Net and Weave Scope work with any orchestration.",
+    "VCS": "Any git-based version control system, e.g. Github or Bitbucket.",
+    "VCSAppCode": "Your application's code in version control.",
+    "VCSPolicySpec": "Your application's manifests, e.g. a Kubernetes manifest, which describes the different services that make up your application.",
+    "WeaveCloud-3": "Weave Cloud provides hosted versions of Scope (for visualization), Prism (for Prometheus) and Flux (for continuous delivery).",
+    "WeaveFlux": "Hosted Weave Flux service, which receives configuration via Weave Cloud on which images to deploy, and whether to automate continuous delivery or to gate it on manual approval.",
+    "WeaveFluxAgent": "The Weave Flux agent sits inside your container cluster and acts on the Flux configuration to actually perform deployments.",
+    "WeavePrism": "Weave Prism is a hosted, scalable Prometheus service.",
+    "WeaveScope": "The Weave Scope UI shows you the containers in your cluster and the relationships and network connections between them in a live graph, allows control, and when running in Weave Cloud you can easily add your team members to gain access",
   };
 
   var arrows = {
+    /*
     "ArrorwPolicySpecNPC": "",
     "ArrowCICR": "",
     "ArrowCRFlux": "",
@@ -98,6 +97,9 @@ It might look scary at first but don't worry, it will all make sense when you wa
     "ArrowFluxClusterAgent": "",
     "ArrowFluxVCS": "",
     "ArrowVCSCI": "",
+    "ArrowOrchestratorPrometheus": "",
+    "ArrowClusterPrometheus": "",
+    */
   };
 
   $('#diagram').load('diagram.svg', function() {
@@ -113,7 +115,7 @@ It might look scary at first but don't worry, it will all make sense when you wa
 <h2>Boot microservices locally, check app in Weave Scope</h2>
 <div style="float:right; width:530px;">
     <!-- WORDS HERE -->
-    <p>In this scenario, we'll take a look at my application, which is a socks shop, by booting it up in Docker on my laptop, using <a target="_blank" href="https://docs.docker.com/engine/installation/">Docker</a> and <a target="_blank" href="https://docs.docker.com/compose/overview/">Docker Compose</a>, and plug it into Weave Scope.</p>
+    <p>In this example, we'll take a look at my application, which is a socks shop, by booting it up in Docker on my laptop, using <a target="_blank" href="https://docs.docker.com/engine/installation/">Docker</a> and <a target="_blank" href="https://docs.docker.com/compose/overview/">Docker Compose</a>, and plug it into Weave Scope.</p>
     <p><em>Goal: run the app on my laptop, and check that it’s working</em></p>
     <p>You can find the <a target="_blank" href="https://github.com/microservices-demo/microservices-demo/tree/master/deploy/docker-only">Docker Compose file here</a>. Start it up like this:</p>
     <pre>$ git clone \
@@ -125,6 +127,7 @@ $ docker-compose up -d</pre>
 $ sudo chmod a+x /usr/local/bin/scope
 $ scope launch --service-token=&lt;token&gt;</pre>
     <p>Replacing <code>&lt;token&gt;</code> with your Weave Cloud token.</p>
+    <p><strong>Problem solved: it's hard to see how all the components in my microservices app interact when I'm running them locally in development.</strong></p>
 </div>
 <div>
     <iframe width="530" height="298" src="https://www.youtube.com/embed/6fb-dmrKTOU?modestbranding=1&autohide=0&showinfo=0&controls=1&rel=0" frameborder="0" allowfullscreen></iframe>
@@ -135,9 +138,10 @@ $ scope launch --service-token=&lt;token&gt;</pre>
 <h2>Set up prod container platform, deploy app, check it’s the same in Weave Scope</h2>
 <div style="float:right; width:530px;">
     <!-- WORDS HERE -->
-    <p>In this scenario, we'll create a Kubernetes cluster and then deploy the socks shop on it.</p>
+    <p>In this example, we'll create a Kubernetes cluster and then deploy the socks shop on it.</p>
     <p><em>Goal: deploy &amp; visualize my app consistently across dev and prod</em></p>
     <p>Start by <a target="_blank" href="http://kubernetes.io/docs/getting-started-guides/kubeadm/">creating a Kubernetes cluster using kubeadm</a>.</p>
+    <p>Note: this example uses Kubernetes, but Weave Cloud intends to fully support Docker Swarm, Mesos and DC/OS soon.</p>
     <p>Then install the socks shop using:</p>
     <pre>$ kubectl apply -f \
   microservices-demo/deploy/kubernetes/manifests</pre>
@@ -146,6 +150,7 @@ $ scope launch --service-token=&lt;token&gt;</pre>
   'https://cloud.weave.works/launch/k8s/weavescope.yaml\
 ?service-token=&lt;token&gt;'</pre>
     <p>Replacing <code>&lt;token&gt;</code> with your Weave Cloud token.</p>
+    <p><strong>Problem solved: it's hard to confirm that an app has been successfully deployed the same in production as it was when I was running it in development.</strong></p>
 </div>
 <div>
     <iframe width="530" height="298" src="https://www.youtube.com/embed/q7A3jqh2hOs?modestbranding=1&autohide=0&showinfo=0&controls=1&rel=0" frameborder="0" allowfullscreen></iframe>
@@ -153,11 +158,13 @@ $ scope launch --service-token=&lt;token&gt;</pre>
 <div style="clear:both;"></div>
 
 
-
 <h2>Fast iteration using CI/CD pipeline using Weave Flux</h2>
 <div style="float:right; width:530px;">
     <!-- WORDS HERE -->
+    <p>In this example, I'll configure a CI/CD pipeline which includes: a CI system (<a target="_blank" href="https://travis-ci.org">Travis-CI</a>), a docker registry (<a target="_blank" href="https://quay.io">Quay.io</a>), Weave Flux and <a target="_blank" href="http://kubernetes.io">Kubernetes</a>.
     <p><em>Goal: commit and push code and automatically deploy it to production</em></p>
+    <p>To reproduce this demo yourself, see <a target="_blank" href="https://docs.google.com/document/d/1BNDYGnTKdyZ_dG_FUyhySligV4YI67jgasyZHbnK4fI/edit#heading=h.8thkkns7sirz">these detailed instructions</a>, which starts with making a fork of the <a target="_blank" href="https://github.com/microservices-demo/microservices-demo/">microservices-demo configuration repo</a> and <a target="_blank" href="https://github.com/microservices-demo/front-end/">the front-end code repo</a> to your own GitHub repo.</p>
+    <p><strong>Problem solved: my frontend developers shouldn't need to know about the details of Kubernetes to deploy simple code changes. They should be able to just <code>git push</code>.</strong></p>
 </div>
 <div>
     <iframe width="530" height="298" src="https://www.youtube.com/embed/CKHXYtU1n8Y?modestbranding=1&autohide=0&showinfo=0&controls=1&rel=0" frameborder="0" allowfullscreen></iframe>
@@ -168,7 +175,10 @@ $ scope launch --service-token=&lt;token&gt;</pre>
 <h2>Monitor microservices metrics with Weave Prism</h2>
 <div style="float:right; width:530px;">
     <!-- WORDS HERE -->
+    <p>In this example, I'll set up monitoring for my microservices so that I can check whether they're healthy and dig into production issues, e.g. performance.</p>
     <p><em>Goal: collect detailed metrics from my application, query historical data</em></p>
+    <p>To reproduce this demo yourself, see <a target="_blank" href="https://docs.google.com/document/d/1BNDYGnTKdyZ_dG_FUyhySligV4YI67jgasyZHbnK4fI/edit#heading=h.luz5i842w3bg">these detailed instructions</a>.</p>
+    <p><strong>Problem solved: I need to be able to monitor my application, and for rapidly-changing dynamic deployments, legacy monitoring tools that are statically configured don't work well. So I choose Prometheus. But Prometheus is hard to manage on my own, because it runs on a single server and isn't scalable, and so I would like someone else to run it for me.</strong></p>
 </div>
 <div>
     <iframe width="530" height="298" src="https://www.youtube.com/embed/Fqwj3ibe5So?modestbranding=1&autohide=0&showinfo=0&controls=1&rel=0" frameborder="0" allowfullscreen></iframe>
@@ -179,7 +189,11 @@ $ scope launch --service-token=&lt;token&gt;</pre>
 <h2>Security with network policy &amp; segmentation with Weave Net Policy</h2>
 <div style="float:right; width:530px;">
     <!-- WORDS HERE -->
+    <p>In this example, I'll firewall off unrelated services by applying Kubernetes policy which isolates components of my app which don't need to talk to eachother.</p>
     <p><em>Goal: create network policy that firewalls unrelated services</em></p>
+    <p>Applying the policy is as simple as:</p>
+    <pre>$ kubectl apply -f &lt;path-to-policy-files&gt;<pre>
+    <p><strong>Problem solved: I need security in depth to satisfy regulatory and business security policy requirements, and so I need to isolate unrelated services in my microservices application.</strong></p>
 </div>
 <div>
     <iframe width="530" height="298" src="https://www.youtube.com/embed/3qRRP3fQBTs?modestbranding=1&autohide=0&showinfo=0&controls=1&rel=0" frameborder="0" allowfullscreen></iframe>
@@ -187,7 +201,7 @@ $ scope launch --service-token=&lt;token&gt;</pre>
 <div style="clear:both;"></div>
 
 <h2>What's next?</h2>
-<a href="https://cloud.weave.works" class="btn">Sign up for Weave Cloud</a> <a href="https://weave.works/" class="btn">Try our Open Source</a> <a href="https://go.pardot.com/l/123932/2016-06-16/5qrv4k" class="btn">Request a Demo</a>
+<a target="_blank" href="https://cloud.weave.works" class="btn">Sign up for Weave Cloud</a> <a target="_blank" href="https://weave.works/" class="btn">Try our Open Source</a> <a target="_blank" href="https://go.pardot.com/l/123932/2016-06-16/5qrv4k" class="btn">Request a Demo</a>
 
     </section>
 
