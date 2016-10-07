@@ -192,7 +192,7 @@ $ scope launch --service-token=&lt;token&gt;</pre>
     <p>In this example, I'll firewall off unrelated services by applying Kubernetes policy which isolates components of my app which don't need to talk to eachother.</p>
     <p><em>Goal: create network policy that firewalls unrelated services</em></p>
     <p>Applying the policy is as simple as:</p>
-    <pre>$ kubectl apply -f &lt;path-to-policy-files&gt;<pre>
+    <pre>$ kubectl apply -f &lt;path-to-policy-files&gt;</pre>
     <p><strong>Problem solved: I need security in depth to satisfy regulatory and business security policy requirements, and so I need to isolate unrelated services in my microservices application.</strong></p>
 </div>
 <div>
