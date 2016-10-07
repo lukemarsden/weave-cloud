@@ -41,6 +41,14 @@ It might look scary at first but don't worry, it will all make sense when you wa
 <p><em>Note: this example uses Kubernetes, but Weave Cloud intends to fully support Docker Swarm, Mesos and DC/OS soon.</em></p>
 
 <div id="diagram" style="width:100%; height:500; margin-top:1em;"></div>
+<!--
+        position: {
+            adjust: {
+                x: -300,
+                y: -50
+            }
+        }
+-->
 
 <script>
   function setTip(element, text) {
@@ -48,9 +56,8 @@ It might look scary at first but don't worry, it will all make sense when you wa
     $("#" + element).qtip({
       content: { text: text },
       position: {
-        target: 'mouse', // Position it where the click was...
-        adjust: { mouse: false } // ...but don't follow the mouse
-      },
+        target: 'mouse',
+      }
     });
   };
 
@@ -59,6 +66,8 @@ It might look scary at first but don't worry, it will all make sense when you wa
     "CI": "A continous integration system, e.g. Circle, Jenkins or Gitlab CI",
     "CR": "A container registry, e.g. Docker Hub, Amazon ECR, etc",
     "ClusterApp": "This is your app, in production!",
+    "DeveloperApp": "This is your app, in development!",
+    "ContainerOrchestrator": "",
     "ClusterWeaveNPC": "",
     "ClusterWeaveNet": "",
     "ClusterWeaveScopeProbe": "The probe collect real-time reports about the state of your app in production",
@@ -69,6 +78,8 @@ It might look scary at first but don't worry, it will all make sense when you wa
     "DevScopeProbe": "",
     "KubernetesCluster": "",
     "VCS": "Any version control system, e.g. Github or Bitbucket",
+    "VCSAppCode": "",
+    "VCSPolicySpec": "",
     "WeaveCloud": "",
     "WeaveFlux": "Hosted Weave Flux service",
     "WeaveFluxAgent": "The agent makes sure your latest release is deployed in your cluster",
