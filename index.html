@@ -33,23 +33,10 @@
 I've chosen to adopt cloud-native application development using containers &amp; microservices because I want to accelerate delivery.
 On this page I'm going to show you how Weave Cloud helps me at different stages of my application development lifecycle.</p>
 
+<h2>What are we aiming for?</h2>
 
-
-<h2>Fast iteration using CI/CD pipeline using Weave Flux</h2>
-<div style="float:right; width:530px;">
-    <!-- WORDS HERE -->
-    <p>In this example, I'll configure a CI/CD pipeline which includes: a CI system (<a target="_blank" href="https://travis-ci.org">Travis-CI</a>), a docker registry (<a target="_blank" href="https://quay.io">Quay.io</a>), Weave Flux and <a target="_blank" href="http://kubernetes.io">Kubernetes</a>.
-    <p><em>Goal: commit and push code and automatically deploy it to production</em></p>
-    <p>To reproduce this demo yourself, see <a target="_blank" href="https://docs.google.com/document/d/1BNDYGnTKdyZ_dG_FUyhySligV4YI67jgasyZHbnK4fI/edit#heading=h.8thkkns7sirz">these detailed instructions</a>, which starts with making a fork of the <a target="_blank" href="https://github.com/microservices-demo/microservices-demo/">microservices-demo configuration repo</a> and <a target="_blank" href="https://github.com/microservices-demo/front-end/">the front-end code repo</a> to your own GitHub repo.</p>
-    <p><strong>Problem solved: my frontend developers shouldn't need to know about the details of Kubernetes to deploy simple code changes. They should be able to just <code>git push</code>.</strong></p>
-</div>
-<div>
-    <iframe width="530" height="298" src="https://www.youtube.com/embed/CKHXYtU1n8Y?modestbranding=1&autohide=0&showinfo=0&controls=1&rel=0" frameborder="0" allowfullscreen></iframe>
-</div>
-<div style="clear:both;"></div>
-
-
-
+<p>TODO: simplified ABCDE diagram, with "target end state".</p>
+<p>TODO: Re-articulate everything as more of a user-focused joined-up story?</p>
 
 
 <h2>Boot microservices locally, check app in Weave Scope</h2>
@@ -94,6 +81,20 @@ $ scope launch --service-token=&lt;token&gt;</pre>
 </div>
 <div>
     <iframe width="530" height="298" src="https://www.youtube.com/embed/q7A3jqh2hOs?modestbranding=1&autohide=0&showinfo=0&controls=1&rel=0" frameborder="0" allowfullscreen></iframe>
+</div>
+<div style="clear:both;"></div>
+
+
+<h2>Fast iteration using CI/CD pipeline using Weave Flux</h2>
+<div style="float:right; width:530px;">
+    <!-- WORDS HERE -->
+    <p>In this example, I'll configure a CI/CD pipeline which includes: a CI system (<a target="_blank" href="https://travis-ci.org">Travis-CI</a>), a docker registry (<a target="_blank" href="https://quay.io">Quay.io</a>), Weave Flux and <a target="_blank" href="http://kubernetes.io">Kubernetes</a>.
+    <p><em>Goal: commit and push code and automatically deploy it to production</em></p>
+    <p>To reproduce this demo yourself, see <a target="_blank" href="https://docs.google.com/document/d/1BNDYGnTKdyZ_dG_FUyhySligV4YI67jgasyZHbnK4fI/edit#heading=h.8thkkns7sirz">these detailed instructions</a>, which starts with making a fork of the <a target="_blank" href="https://github.com/microservices-demo/microservices-demo/">microservices-demo configuration repo</a> and <a target="_blank" href="https://github.com/microservices-demo/front-end/">the front-end code repo</a> to your own GitHub repo.</p>
+    <p><strong>Problem solved: my frontend developers shouldn't need to know about the details of Kubernetes to deploy simple code changes. They should be able to just <code>git push</code>.</strong></p>
+</div>
+<div>
+    <iframe width="530" height="298" src="https://www.youtube.com/embed/CKHXYtU1n8Y?modestbranding=1&autohide=0&showinfo=0&controls=1&rel=0" frameborder="0" allowfullscreen></iframe>
 </div>
 <div style="clear:both;"></div>
 
